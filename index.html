@@ -1,0 +1,2689 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="«Ход конём» — клуб настольных игр в Санкт-Петербурге: открытые игротеки по будням и выходным, более 200 игр, ведущие объясняют правила новичкам.">
+  <meta name="theme-color" content="#1F4D3A">
+  <title>Ход конём — клуб настольных игр в Санкт-Петербурге</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%99%9E%3C/text%3E%3C/svg%3E">
+  <style>
+    /* =========================================================
+       1. Переменные дизайна
+       ========================================================= */
+    :root {
+      color-scheme: light;
+
+      /* Цвета */
+      --color-green: #1F4D3A;
+      --color-green-dark: #163A2B;
+      --color-green-light: #2A6550;
+      --color-green-tint: #DDE9E0;
+      --color-cream: #F7F1E3;
+      --color-cream-dark: #EEE5D0;
+      --color-paper: #FFFBF3;
+      --color-accent: #E3A72F;
+      --color-accent-light: #F0BC52;
+      --color-accent-tint: #F7E4B8;
+      --color-text: #2B2118;
+      --color-text-muted: #5A4A3C;
+      --color-brown: #5A3E28;
+      --color-sage: #7FA58F;
+      --color-star: #A06A0C;
+      --color-error: #A12A1E;
+      --color-border: rgba(43, 33, 24, 0.12);
+      --color-input-border: #8C7B66;
+      --color-on-dark-muted: rgba(247, 241, 227, 0.86);
+      --focus-ring: var(--color-green);
+
+      /* Типографика */
+      --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+      --font-display: Georgia, "Times New Roman", Times, serif;
+      --fs-base: clamp(1rem, 0.95rem + 0.2vw, 1.0625rem);
+      --fs-small: 0.9375rem;
+      --fs-xs: 0.875rem;
+      --fs-lead: clamp(1.0625rem, 1rem + 0.4vw, 1.25rem);
+      --fs-h1: clamp(2.25rem, 1.5rem + 3.4vw, 4.25rem);
+      --fs-h2: clamp(1.875rem, 1.4rem + 1.8vw, 2.75rem);
+      --fs-h3: clamp(1.1875rem, 1.1rem + 0.3vw, 1.3125rem);
+      --lh-base: 1.6;
+      --lh-tight: 1.15;
+
+      /* Отступы и размеры */
+      --space-xs: 0.5rem;
+      --space-sm: 0.75rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+      --space-2xl: 3rem;
+      --section-py: clamp(3.5rem, 2.5rem + 4.5vw, 6.5rem);
+      --gutter: 1rem;
+      --container: 75rem;
+      --header-h: 4rem;
+
+      /* Скругления, тени, анимации */
+      --radius-sm: 0.5rem;
+      --radius-md: 0.875rem;
+      --radius-lg: 1.25rem;
+      --radius-pill: 999px;
+      --shadow-sm: 0 1px 2px rgba(43, 33, 24, 0.06), 0 4px 12px rgba(43, 33, 24, 0.06);
+      --shadow-md: 0 8px 20px rgba(43, 33, 24, 0.12);
+      --shadow-lg: 0 18px 40px rgba(43, 33, 24, 0.16);
+      --transition: 0.25s ease;
+    }
+
+    @media (min-width: 600px) {
+      :root { --gutter: 1.5rem; }
+    }
+
+    @media (min-width: 900px) {
+      :root {
+        --gutter: 2rem;
+        --header-h: 4.75rem;
+      }
+    }
+
+    /* =========================================================
+       2. Базовые стили
+       ========================================================= */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      font-size: var(--fs-base);
+      line-height: var(--lh-base);
+      color: var(--color-text);
+      background-color: var(--color-cream);
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    h1, h2, h3 {
+      margin: 0 0 0.5em;
+      font-family: var(--font-display);
+      font-weight: 700;
+      line-height: var(--lh-tight);
+      text-wrap: balance;
+    }
+
+    p {
+      margin: 0 0 1em;
+    }
+
+    a {
+      color: var(--color-green);
+      text-underline-offset: 0.2em;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--focus-ring);
+      outline-offset: 3px;
+    }
+
+    main:focus {
+      outline: none;
+    }
+
+    section[id] {
+      scroll-margin-top: var(--header-h);
+    }
+
+    input,
+    select,
+    textarea {
+      scroll-margin-top: calc(var(--header-h) + 1.5rem);
+    }
+
+    .container {
+      width: min(100% - 2 * var(--gutter), var(--container));
+      margin-inline: auto;
+    }
+
+    .visually-hidden {
+      position: absolute !important;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .sprite {
+      position: absolute;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 1rem;
+      z-index: 200;
+      padding: 0.75rem 1.25rem;
+      background: var(--color-accent);
+      color: var(--color-text);
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+    }
+
+    .skip-link:focus {
+      top: 0.75rem;
+    }
+
+    /* =========================================================
+       3. Кнопки
+       ========================================================= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-height: 3rem;
+      padding: 0.75rem 1.5rem;
+      border: 2px solid transparent;
+      border-radius: var(--radius-pill);
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition:
+        transform var(--transition),
+        box-shadow var(--transition),
+        background-color var(--transition),
+        color var(--transition),
+        border-color var(--transition);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+
+    .btn--accent {
+      background-color: var(--color-accent);
+      color: var(--color-text);
+    }
+
+    .btn--accent:hover {
+      background-color: var(--color-accent-light);
+    }
+
+    .btn--primary {
+      background-color: var(--color-green);
+      color: var(--color-cream);
+    }
+
+    .btn--primary:hover {
+      background-color: var(--color-green-light);
+    }
+
+    .btn--outline {
+      background-color: transparent;
+      color: var(--color-green);
+      border-color: var(--color-green);
+    }
+
+    .btn--outline:hover {
+      background-color: var(--color-green);
+      color: var(--color-cream);
+    }
+
+    .btn--ghost {
+      background-color: transparent;
+      color: var(--color-cream);
+      border-color: rgba(247, 241, 227, 0.6);
+    }
+
+    .btn--ghost:hover {
+      background-color: var(--color-cream);
+      color: var(--color-green);
+      border-color: var(--color-cream);
+    }
+
+    .btn--sm {
+      min-height: 2.5rem;
+      padding: 0.5rem 1.125rem;
+    }
+
+    .btn--lg {
+      min-height: 3.5rem;
+      padding: 1rem 1.75rem;
+      font-size: 1.0625rem;
+    }
+
+    .btn--block {
+      width: 100%;
+    }
+
+    /* =========================================================
+       4. Header и навигация
+       ========================================================= */
+    .site-header {
+      --focus-ring: var(--color-accent);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: var(--color-green);
+      color: var(--color-cream);
+      box-shadow: 0 2px 14px rgba(0, 0, 0, 0.18);
+    }
+
+    .header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      min-height: var(--header-h);
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      color: inherit;
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-size: 1.375rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      border-radius: var(--radius-sm);
+    }
+
+    .logo__icon {
+      --knight-eye: var(--color-accent);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background-color: var(--color-accent);
+      color: var(--color-green);
+      transition: transform var(--transition);
+    }
+
+    .logo__icon svg {
+      width: 1.875rem;
+      height: 1.875rem;
+    }
+
+    .logo:hover .logo__icon {
+      transform: rotate(-12deg);
+    }
+
+    /* Кнопка-«бургер» */
+    .nav-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 3rem;
+      height: 3rem;
+      padding: 0;
+      border: 2px solid rgba(247, 241, 227, 0.35);
+      border-radius: var(--radius-sm);
+      background: transparent;
+      color: var(--color-cream);
+      cursor: pointer;
+      transition: background-color var(--transition), border-color var(--transition);
+    }
+
+    .nav-toggle:hover {
+      background-color: rgba(247, 241, 227, 0.08);
+      border-color: var(--color-cream);
+    }
+
+    .nav-toggle__bars {
+      position: relative;
+      display: block;
+      width: 1.375rem;
+      height: 2px;
+      border-radius: 2px;
+      background-color: currentColor;
+      transition: background-color var(--transition);
+    }
+
+    .nav-toggle__bars::before,
+    .nav-toggle__bars::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      border-radius: 2px;
+      background-color: currentColor;
+      transition: transform var(--transition);
+    }
+
+    .nav-toggle__bars::before { transform: translateY(-7px); }
+    .nav-toggle__bars::after { transform: translateY(7px); }
+
+    .nav-toggle[aria-expanded="true"] .nav-toggle__bars { background-color: transparent; }
+    .nav-toggle[aria-expanded="true"] .nav-toggle__bars::before { transform: rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] .nav-toggle__bars::after { transform: rotate(-45deg); }
+
+    /* Мобильное меню */
+    .nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      max-height: calc(100vh - var(--header-h));
+      max-height: calc(100dvh - var(--header-h));
+      overflow-y: auto;
+      background-color: var(--color-green);
+      border-top: 1px solid rgba(247, 241, 227, 0.15);
+      box-shadow: 0 16px 24px rgba(0, 0, 0, 0.2);
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-0.5rem);
+      transition:
+        opacity var(--transition),
+        transform var(--transition),
+        visibility 0s linear 0.25s;
+    }
+
+    .nav.is-open {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+      transition:
+        opacity var(--transition),
+        transform var(--transition),
+        visibility 0s;
+    }
+
+    .nav__list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      margin: 0;
+      padding: 0.75rem var(--gutter) 1.5rem;
+      list-style: none;
+    }
+
+    .nav__link {
+      display: block;
+      padding: 0.75rem 0.75rem;
+      border-radius: var(--radius-sm);
+      color: var(--color-cream);
+      font-size: 1.0625rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background-color var(--transition);
+    }
+
+    .nav__link:hover {
+      background-color: rgba(247, 241, 227, 0.1);
+    }
+
+    .nav__cta {
+      margin-top: 0.75rem;
+    }
+
+    .nav__cta .btn {
+      width: 100%;
+    }
+
+    /* Кнопка «Записаться» в шапке — только на мобильных и планшетах */
+    .header__cta {
+      margin-left: auto;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 899.98px) {
+      .nav__cta {
+        display: none;
+      }
+    }
+
+    /* На узких экранах уменьшаем логотип и кнопку, чтобы всё помещалось в одну строку */
+    @media (max-width: 429.98px) {
+      .header__inner { gap: 0.5rem; }
+      .logo { font-size: 1.125rem; gap: 0.5rem; white-space: nowrap; }
+      .logo__icon { width: 2.125rem; height: 2.125rem; }
+      .header__cta { padding-inline: 0.875rem; }
+    }
+
+    @media (max-width: 359.98px) {
+      .logo { font-size: 1rem; gap: 0.375rem; }
+      .logo__icon { width: 2rem; height: 2rem; }
+      .header__cta { padding-inline: 0.75rem; font-size: 0.875rem; }
+    }
+
+    @media (min-width: 900px) {
+      .header__cta {
+        display: none;
+      }
+
+      .nav-toggle {
+        display: none;
+      }
+
+      .nav,
+      .nav.is-open {
+        position: static;
+        max-height: none;
+        overflow: visible;
+        background: none;
+        border: 0;
+        box-shadow: none;
+        visibility: visible;
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+
+      .nav__list {
+        flex-direction: row;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0;
+      }
+
+      .nav__link {
+        position: relative;
+        padding: 0.5rem 0.75rem;
+        font-size: 1rem;
+      }
+
+      .nav__link::after {
+        content: "";
+        position: absolute;
+        left: 0.75rem;
+        right: 0.75rem;
+        bottom: 0.25rem;
+        height: 2px;
+        border-radius: 2px;
+        background-color: var(--color-accent);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform var(--transition);
+      }
+
+      .nav__link:hover {
+        background: none;
+      }
+
+      .nav__link:hover::after,
+      .nav__link:focus-visible::after {
+        transform: scaleX(1);
+      }
+
+      .nav__cta {
+        margin: 0 0 0 0.75rem;
+      }
+
+      .nav__cta .btn {
+        width: auto;
+      }
+    }
+
+    /* =========================================================
+       5. Общие стили секций
+       ========================================================= */
+    .section {
+      padding-block: var(--section-py);
+    }
+
+    .section--alt {
+      background-color: var(--color-cream-dark);
+    }
+
+    .felt {
+      --focus-ring: var(--color-accent);
+      background-color: var(--color-green);
+      background-image:
+        radial-gradient(ellipse at 15% 10%, rgba(255, 255, 255, 0.08), transparent 55%),
+        radial-gradient(ellipse at 90% 95%, rgba(0, 0, 0, 0.22), transparent 60%),
+        repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.018) 0 2px, transparent 2px 6px);
+      color: var(--color-cream);
+    }
+
+    .section__head {
+      max-width: 44rem;
+      margin-bottom: clamp(2rem, 1.5rem + 2vw, 3rem);
+    }
+
+    .section__head--center {
+      margin-inline: auto;
+      text-align: center;
+    }
+
+    .section__head--center .eyebrow {
+      justify-content: center;
+    }
+
+    .section__title {
+      margin-bottom: 0.75rem;
+      font-size: var(--fs-h2);
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      margin: 0 0 0.75rem;
+      color: var(--color-green);
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 1.75rem;
+      height: 2px;
+      border-radius: 2px;
+      background-color: var(--color-accent);
+    }
+
+    .felt .eyebrow {
+      color: var(--color-cream);
+    }
+
+    .lead {
+      margin: 0;
+      color: var(--color-text-muted);
+      font-size: var(--fs-lead);
+    }
+
+    .felt .lead {
+      color: var(--color-on-dark-muted);
+    }
+
+    /* =========================================================
+       6. Hero
+       ========================================================= */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding-block: clamp(3rem, 2rem + 5vw, 6rem);
+    }
+
+    .hero__inner {
+      display: grid;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      margin: 0 0 1.25rem;
+      padding: 0.375rem 1rem;
+      border: 1px solid rgba(247, 241, 227, 0.35);
+      border-radius: var(--radius-pill);
+      background-color: rgba(247, 241, 227, 0.08);
+      font-size: var(--fs-small);
+      font-weight: 600;
+    }
+
+    .hero__badge-dot {
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background-color: var(--color-accent);
+      box-shadow: 0 0 0 4px rgba(227, 167, 47, 0.25);
+    }
+
+    .hero__title {
+      margin-bottom: 1.25rem;
+      font-size: var(--fs-h1);
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+    }
+
+    .hero__accent {
+      color: var(--color-accent);
+    }
+
+    .hero__subtitle {
+      max-width: 36rem;
+      margin-bottom: 2rem;
+      color: var(--color-on-dark-muted);
+      font-size: var(--fs-lead);
+    }
+
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1rem;
+    }
+
+    .hero__actions .btn {
+      flex: 1 1 15rem;
+    }
+
+    .hero__stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin: 2.5rem 0 0;
+      padding: 1.5rem 0 0;
+      border-top: 1px solid rgba(247, 241, 227, 0.2);
+      list-style: none;
+    }
+
+    .hero__stats strong {
+      display: block;
+      color: var(--color-accent);
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
+      line-height: 1.1;
+    }
+
+    .hero__stats span {
+      display: block;
+      color: var(--color-on-dark-muted);
+      font-size: var(--fs-small);
+      line-height: 1.4;
+    }
+
+    .hero__art {
+      width: 100%;
+      max-width: 22rem;
+      margin-inline: auto;
+      filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.25));
+    }
+
+    .hero__float {
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .hero__float--slow {
+      animation-duration: 7s;
+      animation-delay: -2s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @media (min-width: 600px) {
+      .hero__actions .btn {
+        flex: 0 0 auto;
+      }
+
+      .hero__art {
+        max-width: 28rem;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .hero__inner {
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 3rem;
+      }
+
+      .hero__art {
+        max-width: 32rem;
+      }
+    }
+
+    /* =========================================================
+       7. О клубе
+       ========================================================= */
+    .about__intro {
+      display: grid;
+      gap: 1rem 4rem;
+      margin-bottom: clamp(2rem, 1.5rem + 2vw, 3rem);
+    }
+
+    .about__intro .section__title {
+      margin-bottom: 0;
+    }
+
+    .about__text {
+      color: var(--color-text-muted);
+    }
+
+    .about__text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .feature {
+      padding: 1.5rem;
+      background-color: var(--color-paper);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .feature__icon {
+      display: grid;
+      place-items: center;
+      width: 3.25rem;
+      height: 3.25rem;
+      margin-bottom: 1rem;
+      border-radius: 1rem;
+      background-color: var(--color-green);
+      color: var(--color-accent);
+    }
+
+    .feature__icon svg {
+      width: 1.75rem;
+      height: 1.75rem;
+    }
+
+    .feature__title {
+      margin-bottom: 0.5rem;
+      font-size: var(--fs-h3);
+    }
+
+    .feature__text {
+      margin: 0;
+      color: var(--color-text-muted);
+    }
+
+    @media (min-width: 600px) {
+      .features { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (min-width: 900px) {
+      .about__intro {
+        grid-template-columns: 5fr 6fr;
+        align-items: end;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .features { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    /* =========================================================
+       8. Популярные игры
+       ========================================================= */
+    .games {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .games > li {
+      display: flex;
+    }
+
+    .game-card {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background-color: var(--color-paper);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .game-card__cover {
+      display: grid;
+      place-items: center;
+      height: 9.5rem;
+      background-color: var(--color-green);
+      background-image: radial-gradient(rgba(255, 255, 255, 0.14) 1.5px, transparent 1.6px);
+      background-size: 18px 18px;
+    }
+
+    .game-card__cover--accent {
+      background-color: var(--color-accent);
+      background-image: radial-gradient(rgba(43, 33, 24, 0.12) 1.5px, transparent 1.6px);
+    }
+
+    .game-card__cover--brown { background-color: var(--color-brown); }
+    .game-card__cover--sage { background-color: var(--color-sage); }
+
+    .game-card__emoji {
+      font-size: 3.75rem;
+      line-height: 1;
+      filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.2));
+      transition: transform var(--transition);
+    }
+
+    .game-card__body {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      gap: 0.5rem;
+      padding: 1.25rem 1.5rem 1.5rem;
+    }
+
+    .game-card__genre {
+      margin: 0;
+      color: var(--color-green);
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .game-card__title {
+      margin: 0;
+      font-size: var(--fs-h3);
+    }
+
+    .game-card__desc {
+      flex-grow: 1;
+      margin: 0;
+      color: var(--color-text-muted);
+    }
+
+    .game-card__meta {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin: 0.75rem 0 0;
+      padding-top: 1rem;
+      border-top: 1px dashed rgba(43, 33, 24, 0.22);
+    }
+
+    .game-card__meta div {
+      min-width: 0;
+    }
+
+    .game-card__meta dt {
+      color: var(--color-text-muted);
+      font-size: var(--fs-xs);
+    }
+
+    .game-card__meta dd {
+      margin: 0.125rem 0 0;
+      font-weight: 700;
+    }
+
+    .difficulty {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.25rem 0.375rem;
+    }
+
+    .difficulty__dots {
+      display: inline-flex;
+      gap: 3px;
+    }
+
+    .difficulty__dots span {
+      width: 0.5rem;
+      height: 0.5rem;
+      border: 1.5px solid var(--color-green);
+      border-radius: 50%;
+    }
+
+    .difficulty--1 .difficulty__dots span:nth-child(-n + 1),
+    .difficulty--2 .difficulty__dots span:nth-child(-n + 2),
+    .difficulty--3 .difficulty__dots span {
+      background-color: var(--color-green);
+    }
+
+    .games__more {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem 2rem;
+      margin-top: 2.5rem;
+      padding: 1.5rem;
+      border: 2px dashed rgba(31, 77, 58, 0.35);
+      border-radius: var(--radius-lg);
+    }
+
+    .games__more p {
+      max-width: 40rem;
+      margin: 0;
+      font-weight: 600;
+    }
+
+    @media (min-width: 600px) {
+      .games { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (min-width: 1024px) {
+      .games { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* =========================================================
+       9. Расписание
+       ========================================================= */
+    .schedule {
+      display: grid;
+      gap: 0.75rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .schedule__item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-areas:
+        "when tag"
+        "what what";
+      gap: 0.5rem 1.5rem;
+      align-items: start;
+      padding: 1.25rem;
+      background-color: var(--color-paper);
+      border: 1px solid var(--color-border);
+      border-left: 6px solid var(--color-green);
+      border-radius: var(--radius-md);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .schedule__item--weekend {
+      border-left-color: var(--color-accent);
+    }
+
+    .schedule__when { grid-area: when; }
+    .schedule__what { grid-area: what; }
+
+    .schedule__item .tag {
+      grid-area: tag;
+      justify-self: end;
+    }
+
+    .schedule__day {
+      margin: 0;
+      font-weight: 700;
+    }
+
+    .schedule__time {
+      margin: 0;
+      color: var(--color-text-muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .schedule__title {
+      margin: 0 0 0.25rem;
+      font-size: var(--fs-h3);
+    }
+
+    .schedule__desc {
+      margin: 0;
+      color: var(--color-text-muted);
+    }
+
+    .schedule__note {
+      margin: 1.5rem 0 0;
+      color: var(--color-text-muted);
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border: 2px solid transparent;
+      border-radius: var(--radius-pill);
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+
+    .tag--green {
+      background-color: var(--color-green-tint);
+      color: var(--color-green);
+    }
+
+    .tag--accent {
+      background-color: var(--color-accent-tint);
+      color: var(--color-text);
+    }
+
+    .tag--dark {
+      background-color: var(--color-green);
+      color: var(--color-cream);
+    }
+
+    .tag--outline {
+      border-color: var(--color-text);
+      color: var(--color-text);
+    }
+
+    @media (min-width: 768px) {
+      .schedule__item {
+        grid-template-columns: 11rem 1fr auto;
+        grid-template-areas: "when what tag";
+        align-items: center;
+        padding: 1.25rem 1.5rem;
+      }
+    }
+
+    /* =========================================================
+       10. Цены
+       ========================================================= */
+    .pricing {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      max-width: 28rem;
+      margin-inline: auto;
+    }
+
+    .price-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 1.5rem;
+      background-color: var(--color-paper);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .price-card--featured {
+      --focus-ring: var(--color-accent);
+      background-color: var(--color-green);
+      color: var(--color-cream);
+      border: 3px solid var(--color-accent);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .price-card__badge {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      margin: 0;
+      padding: 0.375rem 1rem;
+      border-radius: var(--radius-pill);
+      background-color: var(--color-accent);
+      color: var(--color-text);
+      font-size: var(--fs-xs);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      box-shadow: var(--shadow-sm);
+      transform: translate(-50%, -50%);
+    }
+
+    .price-card__title {
+      margin-bottom: 0.375rem;
+      font-size: var(--fs-h3);
+    }
+
+    .price-card__desc {
+      margin: 0 0 1.25rem;
+      color: var(--color-text-muted);
+    }
+
+    .price-card__price {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.25rem 0.5rem;
+      margin: 0;
+    }
+
+    .price-card__value {
+      font-family: var(--font-display);
+      font-size: clamp(2.25rem, 2rem + 1vw, 2.75rem);
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .price-card__period {
+      color: var(--color-text-muted);
+    }
+
+    .price-card__note {
+      margin: 0.5rem 0 0;
+      color: var(--color-text-muted);
+      font-size: var(--fs-small);
+    }
+
+    .price-card--featured .price-card__desc,
+    .price-card--featured .price-card__period,
+    .price-card--featured .price-card__note {
+      color: var(--color-on-dark-muted);
+    }
+
+    .price-card__features {
+      display: grid;
+      flex-grow: 1;
+      align-content: start;
+      gap: 0.625rem;
+      margin: 1.5rem 0 2rem;
+      padding: 1.5rem 0 0;
+      border-top: 1px solid var(--color-border);
+      list-style: none;
+    }
+
+    .price-card--featured .price-card__features {
+      border-top-color: rgba(247, 241, 227, 0.2);
+    }
+
+    .price-card__features li {
+      position: relative;
+      padding-left: 1.75rem;
+    }
+
+    .price-card__features li::before {
+      content: "";
+      position: absolute;
+      left: 0.25rem;
+      top: 0.45em;
+      width: 0.75rem;
+      height: 0.4rem;
+      border-left: 2.5px solid var(--color-green);
+      border-bottom: 2.5px solid var(--color-green);
+      transform: rotate(-45deg);
+    }
+
+    .price-card--featured .price-card__features li::before {
+      border-color: var(--color-accent);
+    }
+
+    .price-card .btn {
+      margin-top: auto;
+    }
+
+    @media (min-width: 900px) {
+      .pricing {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        max-width: none;
+        padding-block: 1rem;
+      }
+
+      .price-card--featured {
+        margin-block: -1rem;
+        padding-block: 3rem 2.5rem;
+      }
+    }
+
+    /* =========================================================
+       11. Отзывы
+       ========================================================= */
+    .reviews {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .review {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 0;
+      padding: 1.75rem;
+      background-color: var(--color-paper);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .review::before {
+      content: "\201C";
+      content: "\201C" / "";
+      position: absolute;
+      top: 0.75rem;
+      right: 1.25rem;
+      color: var(--color-accent);
+      font-family: var(--font-display);
+      font-size: 5rem;
+      line-height: 1;
+      opacity: 0.45;
+    }
+
+    .review__stars {
+      margin: 0;
+      color: var(--color-star);
+      font-size: 1.125rem;
+      letter-spacing: 0.15em;
+    }
+
+    .review__text {
+      flex-grow: 1;
+      margin: 0;
+      font-size: 1.0625rem;
+    }
+
+    .review__text p {
+      margin: 0;
+    }
+
+    .review__author {
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .review__avatar {
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      background-color: var(--color-green);
+      color: var(--color-cream);
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .review__avatar--accent {
+      background-color: var(--color-accent);
+      color: var(--color-text);
+    }
+
+    .review__avatar--brown {
+      background-color: var(--color-brown);
+    }
+
+    .review__name {
+      display: block;
+    }
+
+    .review__meta {
+      display: block;
+      color: var(--color-text-muted);
+      font-size: var(--fs-small);
+    }
+
+    @media (min-width: 900px) {
+      .reviews { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* =========================================================
+       12. Запись
+       ========================================================= */
+    .signup__inner {
+      display: grid;
+      gap: 2.5rem;
+    }
+
+    .steps {
+      display: grid;
+      gap: 1.125rem;
+      margin: 2rem 0 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: step;
+    }
+
+    .steps li {
+      position: relative;
+      min-height: 2.25rem;
+      padding-left: 3.25rem;
+      counter-increment: step;
+    }
+
+    .steps li::before {
+      content: counter(step);
+      position: absolute;
+      top: -0.1rem;
+      left: 0;
+      display: grid;
+      place-items: center;
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 50%;
+      background-color: var(--color-accent);
+      color: var(--color-text);
+      font-weight: 800;
+    }
+
+    .signup__note {
+      margin-top: 2rem;
+      padding: 1.25rem 1.5rem;
+      border: 1px solid rgba(247, 241, 227, 0.25);
+      border-radius: var(--radius-md);
+      background-color: rgba(0, 0, 0, 0.12);
+    }
+
+    .signup__note p {
+      margin: 0;
+    }
+
+    .form {
+      --focus-ring: var(--color-green);
+      display: grid;
+      gap: 1.25rem;
+      padding: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+      background-color: var(--color-paper);
+      color: var(--color-text);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .form__title {
+      margin: 0;
+      font-size: var(--fs-h3);
+    }
+
+    .form__row {
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    .form__field {
+      display: grid;
+      gap: 0.375rem;
+      align-content: start;
+    }
+
+    .form__label {
+      font-weight: 700;
+    }
+
+    .form__req {
+      color: var(--color-error);
+    }
+
+    .form__control {
+      width: 100%;
+      min-height: 3rem;
+      padding: 0.75rem 1rem;
+      background-color: #fff;
+      color: var(--color-text);
+      border: 2px solid var(--color-input-border);
+      border-radius: var(--radius-sm);
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .form__control::placeholder {
+      color: var(--color-text-muted);
+      opacity: 1;
+    }
+
+    .form__control:hover {
+      border-color: var(--color-text-muted);
+    }
+
+    .form__control:focus {
+      border-color: var(--color-green);
+      box-shadow: 0 0 0 4px rgba(31, 77, 58, 0.15);
+    }
+
+    .form__control:user-invalid {
+      border-color: var(--color-error);
+    }
+
+    textarea.form__control {
+      min-height: 7.5rem;
+      resize: vertical;
+    }
+
+    .form__select {
+      position: relative;
+    }
+
+    .form__select select {
+      -webkit-appearance: none;
+      appearance: none;
+      padding-right: 2.75rem;
+      cursor: pointer;
+    }
+
+    .form__select::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 1.125rem;
+      width: 0.6rem;
+      height: 0.6rem;
+      border-right: 2px solid var(--color-text);
+      border-bottom: 2px solid var(--color-text);
+      transform: translateY(-70%) rotate(45deg);
+      pointer-events: none;
+    }
+
+    .form__hint {
+      margin: 0;
+      color: var(--color-text-muted);
+      font-size: var(--fs-small);
+    }
+
+    .form__error {
+      display: none;
+      margin: 0;
+      color: var(--color-error);
+      font-size: var(--fs-small);
+      font-weight: 600;
+    }
+
+    .form__field:has(.form__control:user-invalid) .form__error {
+      display: block;
+    }
+
+    .form__check {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .form__check input {
+      flex-shrink: 0;
+      width: 1.25rem;
+      height: 1.25rem;
+      margin: 0.2rem 0 0;
+      accent-color: var(--color-green);
+      cursor: pointer;
+    }
+
+    .form__note {
+      margin: 0;
+      color: var(--color-text-muted);
+      font-size: var(--fs-small);
+      text-align: center;
+    }
+
+    /* Сообщение об успешной отправке формы */
+    .form__status {
+      margin: 0;
+      padding: 0.875rem 1rem;
+      border-radius: var(--radius-sm);
+      border-left: 4px solid var(--color-green);
+      background-color: rgba(31, 77, 58, 0.1);
+      color: var(--color-text);
+      font-weight: 600;
+    }
+
+    .form__status:empty {
+      display: none;
+    }
+
+    @media (min-width: 600px) {
+      .form__row { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (min-width: 900px) {
+      .signup__inner {
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 4rem;
+        align-items: start;
+      }
+    }
+
+    /* =========================================================
+       13. Контакты
+       ========================================================= */
+    .contacts__grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .contact-card {
+      padding: clamp(1.5rem, 1rem + 2vw, 2.25rem);
+      background-color: var(--color-paper);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 1.5rem;
+      margin: 0;
+    }
+
+    .contact-list dt {
+      margin-bottom: 0.25rem;
+      color: var(--color-green);
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .contact-list dd {
+      margin: 0;
+    }
+
+    .contact-link {
+      color: var(--color-green);
+      font-weight: 700;
+    }
+
+    .contact-link:hover {
+      text-decoration-thickness: 2px;
+    }
+
+    .hours {
+      display: grid;
+      gap: 0.125rem;
+      max-width: 22rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .hours li {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-block: 0.25rem;
+      border-bottom: 1px dashed rgba(43, 33, 24, 0.2);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .hours li:last-child {
+      border-bottom: 0;
+    }
+
+    .socials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 0.25rem;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      min-height: 3rem;
+      padding: 0.375rem 1.25rem 0.375rem 0.375rem;
+      border-radius: var(--radius-pill);
+      background-color: var(--color-green);
+      color: var(--color-cream);
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform var(--transition), background-color var(--transition), box-shadow var(--transition);
+    }
+
+    .social-link:hover {
+      background-color: var(--color-green-light);
+    }
+
+    .social-link__icon {
+      display: grid;
+      place-items: center;
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 50%;
+      background-color: var(--color-cream);
+      color: var(--color-green);
+      font-size: var(--fs-xs);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .social-link__icon svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    .map-card {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background-color: var(--color-paper);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .map-card__map {
+      position: relative;
+      flex-grow: 1;
+      min-height: 16rem;
+      background-color: #E8DEC6;
+      background-image:
+        radial-gradient(circle at 80% 22%, #C9D9C4 0 3.5rem, transparent 3.6rem),
+        linear-gradient(115deg, transparent 0 58%, var(--color-cream) 58% 61%, transparent 61%),
+        linear-gradient(90deg, transparent 0 34%, var(--color-paper) 34% 37%, transparent 37%),
+        linear-gradient(0deg, transparent 0 34.5%, var(--color-paper) 34.5% 38%, transparent 38%),
+        repeating-linear-gradient(90deg, transparent 0 46px, rgba(43, 33, 24, 0.07) 46px 48px),
+        repeating-linear-gradient(0deg, transparent 0 46px, rgba(43, 33, 24, 0.07) 46px 48px);
+    }
+
+    .map-card__pulse {
+      position: absolute;
+      left: 35.5%;
+      top: 63.75%;
+      width: 1.25rem;
+      height: 1.25rem;
+      margin: -0.625rem 0 0 -0.625rem;
+      border-radius: 50%;
+      background-color: rgba(31, 77, 58, 0.35);
+      animation: pulse 2s ease-out infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.6); opacity: 1; }
+      100% { transform: scale(3); opacity: 0; }
+    }
+
+    .map-card__pin {
+      position: absolute;
+      left: 35.5%;
+      top: 63.75%;
+      width: 3.25rem;
+      transform: translate(-50%, -94%);
+      filter: drop-shadow(0 6px 6px rgba(0, 0, 0, 0.25));
+    }
+
+    .map-card__label {
+      position: absolute;
+      left: calc(35.5% + 2rem);
+      top: calc(63.75% - 4.25rem);
+      padding: 0.375rem 0.75rem;
+      border-radius: var(--radius-sm);
+      background-color: var(--color-paper);
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      white-space: nowrap;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .map-card__body {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .map-card__address {
+      margin: 0;
+    }
+
+    @media (min-width: 900px) {
+      .contacts__grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* =========================================================
+       14. Footer
+       ========================================================= */
+    .site-footer {
+      --focus-ring: var(--color-accent);
+      padding-block: 3rem 2rem;
+      background-color: var(--color-green-dark);
+      color: var(--color-cream);
+    }
+
+    .footer__top {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .footer__brand p {
+      max-width: 22rem;
+      margin: 0.75rem 0 0;
+      color: var(--color-on-dark-muted);
+    }
+
+    .footer__logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      font-family: var(--font-display);
+      font-size: 1.375rem;
+      font-weight: 700;
+    }
+
+    .footer__nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.5rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .footer__nav a {
+      display: inline-block;
+      padding-block: 0.25rem;
+      color: var(--color-cream);
+      text-decoration: none;
+      border-radius: 2px;
+    }
+
+    .footer__nav a:hover {
+      text-decoration: underline;
+      text-decoration-color: var(--color-accent);
+      text-decoration-thickness: 2px;
+    }
+
+    .footer__bottom {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.5rem 2rem;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(247, 241, 227, 0.15);
+      color: var(--color-on-dark-muted);
+      font-size: var(--fs-small);
+    }
+
+    .footer__bottom p {
+      margin: 0;
+    }
+
+    @media (min-width: 900px) {
+      .footer__top {
+        grid-template-columns: auto 1fr;
+        align-items: center;
+      }
+
+      .footer__nav ul {
+        justify-content: flex-end;
+      }
+    }
+
+    /* =========================================================
+       15. Hover-эффекты (только для устройств с курсором)
+       ========================================================= */
+    @media (hover: hover) {
+      .btn:hover,
+      .social-link:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+      }
+
+      .feature:hover,
+      .game-card:hover,
+      .price-card:hover,
+      .review:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .game-card:hover .game-card__emoji {
+        transform: scale(1.12) rotate(-6deg);
+      }
+
+      .schedule__item:hover {
+        transform: translateX(4px);
+        box-shadow: var(--shadow-md);
+      }
+    }
+
+    /* =========================================================
+       16. Уменьшение анимаций
+       ========================================================= */
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти к содержанию</a>
+
+  <!-- SVG-спрайт: шахматный конь и фишка-мипл -->
+  <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-knight" viewBox="0 0 64 64">
+      <path fill="currentColor" d="M20 46C20 40 24 36 28 33L18 30L14 26C13 22 16 19 20 17L26 12L27 6L31 10C42 11 50 20 48 34C47 40 46 44 46 46Z"/>
+      <rect x="17" y="47" width="30" height="5" rx="2" fill="currentColor"/>
+      <rect x="13" y="53" width="38" height="6" rx="3" fill="currentColor"/>
+      <circle cx="24" cy="20" r="2" style="fill: var(--knight-eye, #F7F1E3)"/>
+    </symbol>
+    <symbol id="i-meeple" viewBox="0 0 40 40">
+      <path fill="currentColor" stroke="#2B2118" stroke-width="2" stroke-linejoin="round" d="M20 3a6 6 0 0 1 5.2 9L34 15.5c2.5 1 3 3.5 1.5 5.2c-1 1-2.5 1.3-4 .8L27 20l5.5 13c.8 2-.5 4-2.6 4H23l-3-6-3 6H10.1c-2.1 0-3.4-2-2.6-4L13 20l-4.5 1.5c-1.5.5-3 .2-4-.8C3 19 3.5 16.5 6 15.5L14.8 12A6 6 0 0 1 20 3Z"/>
+    </symbol>
+  </svg>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header">
+    <div class="container header__inner">
+      <a class="logo" href="#hero" aria-label="Ход конём — в начало страницы">
+        <span class="logo__icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" focusable="false"><use href="#i-knight"/></svg>
+        </span>
+        <span>Ход конём</span>
+      </a>
+
+      <a class="btn btn--accent btn--sm header__cta" href="#signup">Записаться</a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle__bars" aria-hidden="true"></span>
+        <span class="visually-hidden">Меню</span>
+      </button>
+
+      <nav class="nav" id="site-nav" aria-label="Основная навигация">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="#about">О клубе</a></li>
+          <li><a class="nav__link" href="#games">Игры</a></li>
+          <li><a class="nav__link" href="#schedule">Расписание</a></li>
+          <li><a class="nav__link" href="#prices">Цены</a></li>
+          <li><a class="nav__link" href="#contacts">Контакты</a></li>
+          <li class="nav__cta"><a class="btn btn--accent btn--sm" href="#signup">Записаться</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero felt" id="hero" aria-labelledby="hero-title">
+      <div class="container hero__inner">
+        <div class="hero__content">
+          <p class="hero__badge"><span class="hero__badge-dot" aria-hidden="true"></span>Открытые игротеки каждый день</p>
+          <h1 class="hero__title" id="hero-title">Собери компанию — <span class="hero__accent">мы&nbsp;принесём игры</span></h1>
+          <p class="hero__subtitle">Клуб настольных игр в&nbsp;центре Петербурга: игротеки по&nbsp;вечерам будней и&nbsp;в&nbsp;выходные. Более 200&nbsp;игр, ведущие, которые объяснят правила за&nbsp;пять минут, и&nbsp;столы, за&nbsp;которыми легко найти новых друзей.</p>
+          <div class="hero__actions">
+            <a class="btn btn--accent btn--lg" href="#signup">Записаться на игротеку</a>
+            <a class="btn btn--ghost btn--lg" href="#games">Смотреть игры</a>
+          </div>
+          <ul class="hero__stats">
+            <li><strong>200+</strong><span>игр в&nbsp;библиотеке</span></li>
+            <li><strong>40</strong><span>мест в&nbsp;уютном зале</span></li>
+            <li><strong>7</strong><span>игротек в&nbsp;неделю</span></li>
+          </ul>
+        </div>
+
+        <svg class="hero__art" viewBox="0 0 480 420" role="img" aria-labelledby="hero-art-title" xmlns="http://www.w3.org/2000/svg">
+          <title id="hero-art-title">Игровое поле с шахматным конём, фишками, кубиками и картами</title>
+          <defs>
+            <pattern id="board-checker" width="40" height="40" patternUnits="userSpaceOnUse">
+              <rect width="40" height="40" fill="#F7F1E3"/>
+              <rect width="20" height="20" fill="#E6D8B8"/>
+              <rect x="20" y="20" width="20" height="20" fill="#E6D8B8"/>
+            </pattern>
+          </defs>
+
+          <circle cx="245" cy="215" r="190" fill="#F7F1E3" opacity="0.06"/>
+
+          <!-- Карты -->
+          <g transform="rotate(-22 105 135)">
+            <rect x="55" y="65" width="100" height="140" rx="12" fill="#F7F1E3" stroke="#2B2118" stroke-width="3"/>
+            <rect x="67" y="77" width="76" height="116" rx="7" fill="none" stroke="#E3A72F" stroke-width="3"/>
+            <path d="M105 112l16 23-16 23-16-23z" fill="#E3A72F"/>
+          </g>
+          <g transform="rotate(-6 150 120)">
+            <rect x="100" y="50" width="100" height="140" rx="12" fill="#FFFBF3" stroke="#2B2118" stroke-width="3"/>
+            <circle cx="150" cy="120" r="24" fill="#1F4D3A"/>
+            <circle cx="150" cy="120" r="10" fill="#E3A72F"/>
+          </g>
+
+          <!-- Игровое поле -->
+          <g transform="rotate(-6 240 220)">
+            <rect x="106" y="106" width="268" height="228" rx="18" fill="#5A3E28"/>
+            <rect x="120" y="120" width="240" height="200" rx="6" fill="url(#board-checker)"/>
+          </g>
+
+          <!-- Конь -->
+          <ellipse cx="240" cy="241" rx="55" ry="10" fill="#2B2118" opacity="0.22"/>
+          <use href="#i-knight" x="160" y="95" width="160" height="160" style="color: #1F4D3A; --knight-eye: #F7F1E3"/>
+
+          <!-- Фишки -->
+          <use href="#i-meeple" x="292" y="196" width="58" height="58" style="color: #E3A72F"/>
+          <use href="#i-meeple" x="138" y="232" width="50" height="50" style="color: #3C8466"/>
+
+          <!-- Кубики -->
+          <g class="hero__float">
+            <g transform="rotate(14 382 330)">
+              <rect x="342" y="290" width="80" height="80" rx="16" fill="#E3A72F" stroke="#2B2118" stroke-width="3"/>
+              <circle cx="362" cy="310" r="7" fill="#2B2118"/>
+              <circle cx="402" cy="310" r="7" fill="#2B2118"/>
+              <circle cx="382" cy="330" r="7" fill="#2B2118"/>
+              <circle cx="362" cy="350" r="7" fill="#2B2118"/>
+              <circle cx="402" cy="350" r="7" fill="#2B2118"/>
+            </g>
+          </g>
+          <g class="hero__float hero__float--slow">
+            <g transform="rotate(-14 78 330)">
+              <rect x="46" y="298" width="64" height="64" rx="13" fill="#F7F1E3" stroke="#2B2118" stroke-width="3"/>
+              <circle cx="62" cy="314" r="6" fill="#1F4D3A"/>
+              <circle cx="78" cy="330" r="6" fill="#1F4D3A"/>
+              <circle cx="94" cy="346" r="6" fill="#1F4D3A"/>
+            </g>
+          </g>
+
+          <!-- Искры -->
+          <path d="M430 58c1 9 3 11 12 12-9 1-11 3-12 12-1-9-3-11-12-12 9-1 11-3 12-12z" fill="#E3A72F"/>
+          <path d="M395 125c.7 6 2 7.3 8 8-6 .7-7.3 2-8 8-.7-6-2-7.3-8-8 6-.7 7.3-2 8-8z" fill="#F7F1E3" opacity="0.8"/>
+          <path d="M36 236c.7 6 2 7.3 8 8-6 .7-7.3 2-8 8-.7-6-2-7.3-8-8 6-.7 7.3-2 8-8z" fill="#E3A72F"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ============ О КЛУБЕ ============ -->
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="container">
+        <div class="about__intro">
+          <div>
+            <p class="eyebrow">О клубе</p>
+            <h2 class="section__title" id="about-title">Место, где вечер проходит без&nbsp;телефона</h2>
+          </div>
+          <div class="about__text">
+            <p>«Ход конём» — клуб для тех, кто соскучился по&nbsp;живому общению. Каждый вечер мы раскладываем на&nbsp;зелёном сукне десятки коробок, ставим чайник и&nbsp;помогаем собраться компаниям за&nbsp;столами.</p>
+            <p>Не обязательно знать правила и&nbsp;приходить с&nbsp;друзьями: ведущий подберёт игру под&nbsp;настроение, объяснит всё с&nbsp;нуля и&nbsp;посадит за&nbsp;стол с&nbsp;такими же новичками. Многие наши постоянные гости познакомились именно здесь.</p>
+          </div>
+        </div>
+
+        <ul class="features" role="list">
+          <li class="feature">
+            <div class="feature__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                <rect x="3" y="3" width="18" height="18" rx="4"/>
+                <circle cx="8.5" cy="8.5" r="1.25" fill="currentColor" stroke="none"/>
+                <circle cx="15.5" cy="8.5" r="1.25" fill="currentColor" stroke="none"/>
+                <circle cx="12" cy="12" r="1.25" fill="currentColor" stroke="none"/>
+                <circle cx="8.5" cy="15.5" r="1.25" fill="currentColor" stroke="none"/>
+                <circle cx="15.5" cy="15.5" r="1.25" fill="currentColor" stroke="none"/>
+              </svg>
+            </div>
+            <h3 class="feature__title">Более 200 игр</h3>
+            <p class="feature__text">От быстрых пати-игр на&nbsp;15&nbsp;минут до&nbsp;стратегий на&nbsp;целый вечер. Библиотека пополняется каждый месяц.</p>
+          </li>
+          <li class="feature">
+            <div class="feature__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                <path d="M12 17h.01"/>
+              </svg>
+            </div>
+            <h3 class="feature__title">Ведущие объясняют правила</h3>
+            <p class="feature__text">Не нужно читать толстые буклеты: ведущий расскажет правила, сыграет первый круг вместе с&nbsp;вами и&nbsp;подскажет по&nbsp;ходу.</p>
+          </li>
+          <li class="feature">
+            <div class="feature__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <h3 class="feature__title">Уютный зал на 40 мест</h3>
+            <p class="feature__text">Большие столы с&nbsp;сукном, мягкий свет, диваны для пати-игр и&nbsp;тихий угол для вдумчивых стратегий.</p>
+          </li>
+          <li class="feature">
+            <div class="feature__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                <path d="M17 8h1a4 4 0 1 1 0 8h-1"/>
+                <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/>
+                <path d="M6 2v2"/>
+                <path d="M10 2v2"/>
+                <path d="M14 2v2"/>
+              </svg>
+            </div>
+            <h3 class="feature__title">Чай и печенье включены</h3>
+            <p class="feature__text">Чай, кофе из&nbsp;френч-пресса и&nbsp;печенье уже входят в&nbsp;стоимость любого посещения — без доплат.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ ПОПУЛЯРНЫЕ ИГРЫ ============ -->
+    <section class="section section--alt" id="games" aria-labelledby="games-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow">Библиотека клуба</p>
+          <h2 class="section__title" id="games-title">Популярные игры</h2>
+          <p class="lead">Шесть игр, которые гости просят чаще всего. Уровень сложности подскажет, с&nbsp;чего начать, если вы впервые за&nbsp;игровым столом.</p>
+        </div>
+
+        <ul class="games" role="list">
+          <li>
+            <article class="game-card">
+              <div class="game-card__cover game-card__cover--accent" aria-hidden="true">
+                <span class="game-card__emoji">🕵️</span>
+              </div>
+              <div class="game-card__body">
+                <p class="game-card__genre">Пати-игра · слова</p>
+                <h3 class="game-card__title">Кодовые имена</h3>
+                <p class="game-card__desc">Две команды, одно слово-подсказка и&nbsp;много смеха: найдите своих агентов раньше соперников.</p>
+                <dl class="game-card__meta">
+                  <div><dt>Игроки</dt><dd>4–8</dd></div>
+                  <div><dt>Партия</dt><dd>15&nbsp;мин</dd></div>
+                  <div>
+                    <dt>Сложность</dt>
+                    <dd class="difficulty difficulty--1"><span class="difficulty__dots" aria-hidden="true"><span></span><span></span><span></span></span>Лёгкая</dd>
+                  </div>
+                </dl>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="game-card">
+              <div class="game-card__cover game-card__cover--sage" aria-hidden="true">
+                <span class="game-card__emoji">🐇</span>
+              </div>
+              <div class="game-card__body">
+                <p class="game-card__genre">Пати-игра · ассоциации</p>
+                <h3 class="game-card__title">Диксит</h3>
+                <p class="game-card__desc">Загадочные иллюстрации и&nbsp;ассоциации, по&nbsp;которым вы узнаете друзей с&nbsp;неожиданной стороны.</p>
+                <dl class="game-card__meta">
+                  <div><dt>Игроки</dt><dd>3–6</dd></div>
+                  <div><dt>Партия</dt><dd>30&nbsp;мин</dd></div>
+                  <div>
+                    <dt>Сложность</dt>
+                    <dd class="difficulty difficulty--1"><span class="difficulty__dots" aria-hidden="true"><span></span><span></span><span></span></span>Лёгкая</dd>
+                  </div>
+                </dl>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="game-card">
+              <div class="game-card__cover" aria-hidden="true">
+                <span class="game-card__emoji">🏰</span>
+              </div>
+              <div class="game-card__body">
+                <p class="game-card__genre">Семейная · тайлы</p>
+                <h3 class="game-card__title">Каркассон</h3>
+                <p class="game-card__desc">Стройте города, дороги и&nbsp;монастыри средневековой Франции — карта растёт прямо на&nbsp;столе.</p>
+                <dl class="game-card__meta">
+                  <div><dt>Игроки</dt><dd>2–5</dd></div>
+                  <div><dt>Партия</dt><dd>40&nbsp;мин</dd></div>
+                  <div>
+                    <dt>Сложность</dt>
+                    <dd class="difficulty difficulty--2"><span class="difficulty__dots" aria-hidden="true"><span></span><span></span><span></span></span>Средняя</dd>
+                  </div>
+                </dl>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="game-card">
+              <div class="game-card__cover game-card__cover--accent" aria-hidden="true">
+                <span class="game-card__emoji">🌾</span>
+              </div>
+              <div class="game-card__body">
+                <p class="game-card__genre">Стратегия · торговля</p>
+                <h3 class="game-card__title">Колонизаторы</h3>
+                <p class="game-card__desc">Классика, с&nbsp;которой начинают многие: добывайте ресурсы, торгуйтесь и&nbsp;стройте поселения.</p>
+                <dl class="game-card__meta">
+                  <div><dt>Игроки</dt><dd>3–4</dd></div>
+                  <div><dt>Партия</dt><dd>60–90&nbsp;мин</dd></div>
+                  <div>
+                    <dt>Сложность</dt>
+                    <dd class="difficulty difficulty--2"><span class="difficulty__dots" aria-hidden="true"><span></span><span></span><span></span></span>Средняя</dd>
+                  </div>
+                </dl>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="game-card">
+              <div class="game-card__cover game-card__cover--brown" aria-hidden="true">
+                <span class="game-card__emoji">🚀</span>
+              </div>
+              <div class="game-card__body">
+                <p class="game-card__genre">Стратегия · евро</p>
+                <h3 class="game-card__title">Покорение Марса</h3>
+                <p class="game-card__desc">Управляйте корпорацией и&nbsp;шаг за&nbsp;шагом превращайте Красную планету в&nbsp;пригодную для жизни.</p>
+                <dl class="game-card__meta">
+                  <div><dt>Игроки</dt><dd>1–5</dd></div>
+                  <div><dt>Партия</dt><dd>120&nbsp;мин</dd></div>
+                  <div>
+                    <dt>Сложность</dt>
+                    <dd class="difficulty difficulty--3"><span class="difficulty__dots" aria-hidden="true"><span></span><span></span><span></span></span>Сложная</dd>
+                  </div>
+                </dl>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="game-card">
+              <div class="game-card__cover" aria-hidden="true">
+                <span class="game-card__emoji">🏭</span>
+              </div>
+              <div class="game-card__body">
+                <p class="game-card__genre">Экономическая стратегия</p>
+                <h3 class="game-card__title">Брасс. Бирмингем</h3>
+                <p class="game-card__desc">Промышленная революция в&nbsp;Англии: каналы, железные дороги и&nbsp;хитрые экономические решения.</p>
+                <dl class="game-card__meta">
+                  <div><dt>Игроки</dt><dd>2–4</dd></div>
+                  <div><dt>Партия</dt><dd>60–120&nbsp;мин</dd></div>
+                  <div>
+                    <dt>Сложность</dt>
+                    <dd class="difficulty difficulty--3"><span class="difficulty__dots" aria-hidden="true"><span></span><span></span><span></span></span>Сложная</dd>
+                  </div>
+                </dl>
+              </div>
+            </article>
+          </li>
+        </ul>
+
+        <div class="games__more">
+          <p>Это лишь малая часть: ещё 200+ коробок ждут вас на&nbsp;полках клуба — от&nbsp;детективов до&nbsp;кооперативов.</p>
+          <a class="btn btn--primary" href="#signup">Прийти поиграть</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ РАСПИСАНИЕ ============ -->
+    <section class="section" id="schedule" aria-labelledby="schedule-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow">Каждую неделю</p>
+          <h2 class="section__title" id="schedule-title">Расписание игротек</h2>
+          <p class="lead">У&nbsp;каждого вечера свой формат. Приходите к&nbsp;началу или присоединяйтесь позже — свободное место за&nbsp;столом найдётся.</p>
+        </div>
+
+        <ol class="schedule" role="list">
+          <li class="schedule__item">
+            <div class="schedule__when">
+              <p class="schedule__day">Понедельник</p>
+              <p class="schedule__time"><time datetime="19:00">19:00</time>–<time datetime="23:00">23:00</time></p>
+            </div>
+            <div class="schedule__what">
+              <h3 class="schedule__title">Вечер для новичков</h3>
+              <p class="schedule__desc">Лёгкие и&nbsp;средние игры, ведущие объясняют правила с&nbsp;нуля. Идеально для первого визита.</p>
+            </div>
+            <span class="tag tag--green">Новичкам</span>
+          </li>
+          <li class="schedule__item">
+            <div class="schedule__when">
+              <p class="schedule__day">Вторник</p>
+              <p class="schedule__time"><time datetime="19:00">19:00</time>–<time datetime="23:00">23:00</time></p>
+            </div>
+            <div class="schedule__what">
+              <h3 class="schedule__title">Пати-игры</h3>
+              <p class="schedule__desc">«Кодовые имена», «Диксит», «Крокодил» и&nbsp;другие игры для больших весёлых компаний.</p>
+            </div>
+            <span class="tag tag--accent">Пати</span>
+          </li>
+          <li class="schedule__item">
+            <div class="schedule__when">
+              <p class="schedule__day">Среда</p>
+              <p class="schedule__time"><time datetime="19:00">19:00</time>–<time datetime="23:00">23:00</time></p>
+            </div>
+            <div class="schedule__what">
+              <h3 class="schedule__title">Стратегии</h3>
+              <p class="schedule__desc">Вечер вдумчивых партий: евро-игры, экономика и&nbsp;долгие кампании для опытных игроков.</p>
+            </div>
+            <span class="tag tag--dark">Стратегии</span>
+          </li>
+          <li class="schedule__item">
+            <div class="schedule__when">
+              <p class="schedule__day">Четверг</p>
+              <p class="schedule__time"><time datetime="19:00">19:00</time>–<time datetime="23:00">23:00</time></p>
+            </div>
+            <div class="schedule__what">
+              <h3 class="schedule__title">Вечер для новичков</h3>
+              <p class="schedule__desc">Знакомимся, учимся и&nbsp;играем: ведущие помогут собрать стол и&nbsp;подобрать игру.</p>
+            </div>
+            <span class="tag tag--green">Новичкам</span>
+          </li>
+          <li class="schedule__item">
+            <div class="schedule__when">
+              <p class="schedule__day">Пятница</p>
+              <p class="schedule__time"><time datetime="19:00">19:00</time>–<time datetime="00:00">00:00</time></p>
+            </div>
+            <div class="schedule__what">
+              <h3 class="schedule__title">Пати-игры</h3>
+              <p class="schedule__desc">Пятничный вечер с&nbsp;весёлыми играми, детективами и&nbsp;командными челленджами до&nbsp;полуночи.</p>
+            </div>
+            <span class="tag tag--accent">Пати</span>
+          </li>
+          <li class="schedule__item schedule__item--weekend">
+            <div class="schedule__when">
+              <p class="schedule__day">Суббота</p>
+              <p class="schedule__time"><time datetime="14:00">14:00</time>–<time datetime="23:00">23:00</time></p>
+            </div>
+            <div class="schedule__what">
+              <h3 class="schedule__title">Турнир</h3>
+              <p class="schedule__desc">В&nbsp;14:00 — турнир месяца (в&nbsp;октябре играем в&nbsp;«Каркассон»), вечером — свободная игра за&nbsp;всеми столами.</p>
+            </div>
+            <span class="tag tag--outline">Турнир</span>
+          </li>
+          <li class="schedule__item schedule__item--weekend">
+            <div class="schedule__when">
+              <p class="schedule__day">Воскресенье</p>
+              <p class="schedule__time"><time datetime="13:00">13:00</time>–<time datetime="21:00">21:00</time></p>
+            </div>
+            <div class="schedule__what">
+              <h3 class="schedule__title">Открытая игротека</h3>
+              <p class="schedule__desc">Любые игры из&nbsp;библиотеки: приходите своей компанией или присоединяйтесь к&nbsp;столам.</p>
+            </div>
+            <span class="tag tag--green">Для всех</span>
+          </li>
+        </ol>
+
+        <p class="schedule__note">На турниры нужна предварительная запись — количество мест ограничено.</p>
+      </div>
+    </section>
+
+    <!-- ============ ЦЕНЫ ============ -->
+    <section class="section section--alt" id="prices" aria-labelledby="prices-title">
+      <div class="container">
+        <div class="section__head section__head--center">
+          <p class="eyebrow">Тарифы</p>
+          <h2 class="section__title" id="prices-title">Цены</h2>
+          <p class="lead">Чай, печенье и&nbsp;помощь ведущего входят в&nbsp;любой тариф. Никаких поминутных доплат — играйте, сколько хочется.</p>
+        </div>
+
+        <div class="pricing">
+          <article class="price-card">
+            <h3 class="price-card__title">Разовое посещение</h3>
+            <p class="price-card__desc">Чтобы попробовать и&nbsp;познакомиться с&nbsp;клубом.</p>
+            <p class="price-card__price">
+              <span class="price-card__value">450&nbsp;₽</span>
+              <span class="price-card__period">за&nbsp;вечер</span>
+            </p>
+            <ul class="price-card__features">
+              <li>Одна игротека без ограничения по&nbsp;времени</li>
+              <li>Любые игры из&nbsp;библиотеки</li>
+              <li>Помощь ведущего и&nbsp;объяснение правил</li>
+              <li>Чай, кофе и&nbsp;печенье</li>
+            </ul>
+            <a class="btn btn--outline btn--block" href="#signup">Записаться</a>
+          </article>
+
+          <article class="price-card price-card--featured">
+            <p class="price-card__badge">Рекомендуем</p>
+            <h3 class="price-card__title">Студенческий абонемент</h3>
+            <p class="price-card__desc">Для студентов очной формы при&nbsp;предъявлении студенческого билета.</p>
+            <p class="price-card__price">
+              <span class="price-card__value">1&nbsp;900&nbsp;₽</span>
+              <span class="price-card__period">в&nbsp;месяц</span>
+            </p>
+            <p class="price-card__note">≈ 240&nbsp;₽ за&nbsp;вечер при&nbsp;8&nbsp;визитах</p>
+            <ul class="price-card__features">
+              <li>Безлимитные игротеки в&nbsp;течение 30&nbsp;дней</li>
+              <li>Скидка 50% на&nbsp;участие в&nbsp;турнирах</li>
+              <li>Бронь стола для своей компании</li>
+              <li>Чай, кофе и&nbsp;печенье</li>
+            </ul>
+            <a class="btn btn--accent btn--block" href="#signup">Оформить абонемент</a>
+          </article>
+
+          <article class="price-card">
+            <h3 class="price-card__title">Абонемент на месяц</h3>
+            <p class="price-card__desc">Для тех, кто играет часто и&nbsp;не&nbsp;пропускает турниры.</p>
+            <p class="price-card__price">
+              <span class="price-card__value">2&nbsp;900&nbsp;₽</span>
+              <span class="price-card__period">в&nbsp;месяц</span>
+            </p>
+            <ul class="price-card__features">
+              <li>Безлимитные игротеки в&nbsp;течение 30&nbsp;дней</li>
+              <li>Бесплатное участие в&nbsp;турнирах</li>
+              <li>Бронь стола для своей компании</li>
+              <li>Один гостевой визит для друга</li>
+            </ul>
+            <a class="btn btn--outline btn--block" href="#signup">Оформить абонемент</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ОТЗЫВЫ ============ -->
+    <section class="section" id="reviews" aria-labelledby="reviews-title">
+      <div class="container">
+        <div class="section__head section__head--center">
+          <p class="eyebrow">Отзывы</p>
+          <h2 class="section__title" id="reviews-title">Что говорят игроки</h2>
+        </div>
+
+        <div class="reviews">
+          <figure class="review">
+            <p class="review__stars" role="img" aria-label="Оценка: 5 из 5">★★★★★</p>
+            <blockquote class="review__text">
+              <p>Пришла одна и&nbsp;очень переживала. Через полчаса уже спорила с&nbsp;соседями по&nbsp;столу в&nbsp;«Кодовых именах», а&nbsp;ушла с&nbsp;тремя новыми контактами в&nbsp;Telegram.</p>
+            </blockquote>
+            <figcaption class="review__author">
+              <span class="review__avatar" aria-hidden="true">А</span>
+              <span>
+                <strong class="review__name">Алина</strong>
+                <span class="review__meta">19 лет, студентка</span>
+              </span>
+            </figcaption>
+          </figure>
+
+          <figure class="review">
+            <p class="review__stars" role="img" aria-label="Оценка: 5 из 5">★★★★★</p>
+            <blockquote class="review__text">
+              <p>Ведущие — главное сокровище клуба. Мне за&nbsp;десять минут объяснили «Брасс», который я полгода боялся открыть дома. Теперь хожу по&nbsp;средам на&nbsp;стратегии.</p>
+            </blockquote>
+            <figcaption class="review__author">
+              <span class="review__avatar review__avatar--accent" aria-hidden="true">М</span>
+              <span>
+                <strong class="review__name">Максим</strong>
+                <span class="review__meta">24 года, разработчик</span>
+              </span>
+            </figcaption>
+          </figure>
+
+          <figure class="review">
+            <p class="review__stars" role="img" aria-label="Оценка: 5 из 5">★★★★★</p>
+            <blockquote class="review__text">
+              <p>Лучшее место, чтобы отложить телефон и&nbsp;просто смеяться весь вечер. Студенческий абонемент окупается уже к&nbsp;пятому визиту, а&nbsp;чай с&nbsp;печеньем — приятный бонус.</p>
+            </blockquote>
+            <figcaption class="review__author">
+              <span class="review__avatar review__avatar--brown" aria-hidden="true">Д</span>
+              <span>
+                <strong class="review__name">Даша</strong>
+                <span class="review__meta">21 год, студентка</span>
+              </span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ЗАПИСЬ ============ -->
+    <section class="section felt" id="signup" aria-labelledby="signup-title">
+      <div class="container signup__inner">
+        <div class="signup__info">
+          <p class="eyebrow">Запись</p>
+          <h2 class="section__title" id="signup-title">Записаться на игротеку</h2>
+          <p class="lead">Оставьте контакты — администратор подтвердит запись в&nbsp;течение пары часов и&nbsp;ответит на&nbsp;любые вопросы.</p>
+
+          <ol class="steps">
+            <li>Выберите удобную игротеку из&nbsp;списка.</li>
+            <li>Оставьте телефон или ник в&nbsp;Telegram для подтверждения.</li>
+            <li>Приходите — стол, игры и&nbsp;ведущий уже будут ждать.</li>
+          </ol>
+
+          <div class="signup__note">
+            <p>Идёте компанией больше шести человек? Напишите об&nbsp;этом в&nbsp;комментарии — мы забронируем отдельный стол.</p>
+          </div>
+        </div>
+
+        <form class="form" id="signup-form" method="post" aria-labelledby="form-title">
+          <h3 class="form__title" id="form-title">Заявка на участие</h3>
+
+          <div class="form__row">
+            <div class="form__field">
+              <label class="form__label" for="name">Имя <span class="form__req" aria-hidden="true">*</span></label>
+              <input class="form__control" id="name" name="name" type="text" autocomplete="name" placeholder="Например, Алина" minlength="2" maxlength="40" required>
+              <p class="form__error">Введите имя — минимум 2&nbsp;символа.</p>
+            </div>
+
+            <div class="form__field">
+              <label class="form__label" for="contact">Телефон или Telegram <span class="form__req" aria-hidden="true">*</span></label>
+              <input class="form__control" id="contact" name="contact" type="text" autocomplete="tel" placeholder="+7 900… или @ник" pattern="\+?[0-9\s\-\(\)]{10,20}|@[A-Za-z0-9_]{5,32}" title="Телефон (например, +7 900 123-45-67) или ник Telegram, начинающийся с @" aria-describedby="contact-hint" required>
+              <p class="form__hint" id="contact-hint">Телефон в&nbsp;формате +7… или ник, начинающийся с&nbsp;@</p>
+              <p class="form__error">Проверьте номер телефона или ник в&nbsp;Telegram.</p>
+            </div>
+          </div>
+
+          <div class="form__field">
+            <label class="form__label" for="date">Дата игротеки <span class="form__req" aria-hidden="true">*</span></label>
+            <div class="form__select">
+              <select class="form__control" id="date" name="date" required>
+                <option value="" disabled selected>Выберите игротеку</option>
+                <optgroup label="Эта неделя">
+                  <option value="2026-10-08">Чт, 8 октября — Вечер для новичков, 19:00</option>
+                  <option value="2026-10-09">Пт, 9 октября — Пати-игры, 19:00</option>
+                  <option value="2026-10-10">Сб, 10 октября — Турнир по «Каркассону», 14:00</option>
+                  <option value="2026-10-11">Вс, 11 октября — Открытая игротека, 13:00</option>
+                </optgroup>
+                <optgroup label="Следующая неделя">
+                  <option value="2026-10-12">Пн, 12 октября — Вечер для новичков, 19:00</option>
+                  <option value="2026-10-13">Вт, 13 октября — Пати-игры, 19:00</option>
+                  <option value="2026-10-14">Ср, 14 октября — Стратегии, 19:00</option>
+                </optgroup>
+              </select>
+            </div>
+            <p class="form__error">Выберите дату игротеки.</p>
+          </div>
+
+          <div class="form__field">
+            <label class="form__label" for="comment">Комментарий</label>
+            <textarea class="form__control" id="comment" name="comment" rows="4" maxlength="500" placeholder="Сколько вас будет, во что хотели бы поиграть, есть ли опыт…"></textarea>
+          </div>
+
+          <div class="form__check">
+            <input id="agree" name="agree" type="checkbox" required>
+            <label for="agree">Согласен(на) на&nbsp;обработку персональных данных для подтверждения записи <span class="form__req" aria-hidden="true">*</span></label>
+          </div>
+
+          <p class="form__status" id="form-status" role="status" aria-live="polite" tabindex="-1"></p>
+
+          <button class="btn btn--accent btn--lg btn--block" type="submit">Отправить заявку</button>
+          <p class="form__note">Поля, отмеченные *, обязательны. Учебный проект: данные никуда не&nbsp;отправляются.</p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============ КОНТАКТЫ ============ -->
+    <section class="section" id="contacts" aria-labelledby="contacts-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow">Контакты</p>
+          <h2 class="section__title" id="contacts-title">Как нас найти</h2>
+          <p class="lead">Мы в&nbsp;самом центре города — удобно добраться после пар или работы.</p>
+        </div>
+
+        <div class="contacts__grid">
+          <div class="contact-card">
+            <dl class="contact-list">
+              <div>
+                <dt>Адрес</dt>
+                <dd>Санкт-Петербург, ул.&nbsp;Ладейная, д.&nbsp;64, 2-й этаж<br>Вход со&nbsp;двора — ищите вывеску с&nbsp;конём.</dd>
+              </div>
+              <div>
+                <dt>Как добраться</dt>
+                <dd>7&nbsp;минут пешком от&nbsp;станций метро «Владимирская» и&nbsp;«Достоевская».</dd>
+              </div>
+              <div>
+                <dt>Часы работы</dt>
+                <dd>
+                  <ul class="hours">
+                    <li><span>Пн–Чт</span><span>18:00–23:00</span></li>
+                    <li><span>Пятница</span><span>18:00–00:00</span></li>
+                    <li><span>Суббота</span><span>13:00–00:00</span></li>
+                    <li><span>Воскресенье</span><span>12:00–22:00</span></li>
+                  </ul>
+                </dd>
+              </div>
+              <div>
+                <dt>Телефон</dt>
+                <dd><a class="contact-link" href="tel:+78125550164">+7 (812) 555-01-64</a></dd>
+              </div>
+              <div>
+                <dt>Мы в соцсетях</dt>
+                <dd>
+                  <div class="socials">
+                    <a class="social-link" href="https://vk.com/hodkonem_spb" target="_blank" rel="noopener noreferrer">
+                      <span class="social-link__icon" aria-hidden="true">VK</span>
+                      ВКонтакте<span class="visually-hidden"> (откроется в новой вкладке)</span>
+                    </a>
+                    <a class="social-link" href="https://t.me/hodkonem_spb" target="_blank" rel="noopener noreferrer">
+                      <span class="social-link__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false"><path fill="currentColor" d="M21.5 3.5 2.8 10.7c-.9.4-.9 1.6.1 1.9l4.6 1.4 1.8 5.5c.3.8 1.3 1 1.9.4l2.6-2.5 4.6 3.4c.7.5 1.7.1 1.9-.7L23 4.8c.2-1-.6-1.7-1.5-1.3Z"/></svg>
+                      </span>
+                      Telegram<span class="visually-hidden"> (откроется в новой вкладке)</span>
+                    </a>
+                  </div>
+                </dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="map-card">
+            <div class="map-card__map" aria-hidden="true">
+              <span class="map-card__pulse"></span>
+              <svg class="map-card__pin" viewBox="0 0 48 48" focusable="false">
+                <path d="M24 4C15.7 4 9 10.6 9 18.8 9 30 24 44 24 44s15-14 15-25.2C39 10.6 32.3 4 24 4Z" fill="#1F4D3A"/>
+                <circle cx="24" cy="19" r="6.5" fill="#E3A72F"/>
+              </svg>
+              <span class="map-card__label">♞ Ход конём</span>
+            </div>
+            <div class="map-card__body">
+              <p class="map-card__address"><strong>ул. Ладейная, 64</strong><br>м. «Владимирская»</p>
+              <a class="btn btn--primary" href="https://yandex.ru/maps/2/saint-petersburg/" target="_blank" rel="noopener noreferrer">
+                Открыть на карте<span class="visually-hidden"> (откроется в новой вкладке)</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <div class="footer__logo">
+            <span class="logo__icon" aria-hidden="true">
+              <svg viewBox="0 0 64 64" focusable="false"><use href="#i-knight"/></svg>
+            </span>
+            Ход конём
+          </div>
+          <p>Клуб настольных игр в&nbsp;Санкт-Петербурге. Собери компанию — мы принесём игры.</p>
+        </div>
+        <nav class="footer__nav" aria-label="Навигация в подвале сайта">
+          <ul>
+            <li><a href="#about">О клубе</a></li>
+            <li><a href="#games">Игры</a></li>
+            <li><a href="#schedule">Расписание</a></li>
+            <li><a href="#prices">Цены</a></li>
+            <li><a href="#reviews">Отзывы</a></li>
+            <li><a href="#signup">Записаться</a></li>
+            <li><a href="#contacts">Контакты</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer__bottom">
+        <p>© 2026 Клуб настольных игр «Ход конём»</p>
+        <p>Сайт является учебным проектом. Адрес, телефон и&nbsp;отзывы вымышлены.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var toggle = document.querySelector('.nav-toggle');
+      var nav = document.getElementById('site-nav');
+      if (!toggle || !nav) return;
+
+      var desktop = window.matchMedia('(min-width: 900px)');
+
+      function isOpen() {
+        return toggle.getAttribute('aria-expanded') === 'true';
+      }
+
+      function setMenu(open) {
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        nav.classList.toggle('is-open', open);
+      }
+
+      // Открытие / закрытие по кнопке
+      toggle.addEventListener('click', function () {
+        setMenu(!isOpen());
+      });
+
+      // Закрытие после выбора пункта меню
+      nav.addEventListener('click', function (event) {
+        if (event.target.closest('a')) {
+          setMenu(false);
+        }
+      });
+
+      // Закрытие по клавише Escape
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && isOpen()) {
+          setMenu(false);
+          toggle.focus();
+        }
+      });
+
+      // Закрытие по клику вне меню
+      document.addEventListener('click', function (event) {
+        if (isOpen() && !nav.contains(event.target) && !toggle.contains(event.target)) {
+          setMenu(false);
+        }
+      });
+
+      // Сброс состояния при переходе на десктопную ширину
+      function onBreakpointChange(event) {
+        if (event.matches) {
+          setMenu(false);
+        }
+      }
+
+      if (desktop.addEventListener) {
+        desktop.addEventListener('change', onBreakpointChange);
+      } else if (desktop.addListener) {
+        desktop.addListener(onBreakpointChange);
+      }
+    })();
+
+    // Отправка формы записи без перезагрузки страницы
+    (function () {
+      'use strict';
+
+      var form = document.getElementById('signup-form');
+      var status = document.getElementById('form-status');
+      if (!form || !status) return;
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault(); // данные не уходят в адресную строку
+
+        var name = form.elements.namedItem('name').value.trim();
+        var date = form.elements.namedItem('date');
+        var dateText = date.options[date.selectedIndex].text;
+
+        // В реальном проекте здесь был бы fetch('/api/signup', { method: 'POST', body: new FormData(form) })
+        status.textContent = 'Спасибо, ' + name + '! Заявка на «' + dateText +
+          '» принята. Администратор свяжется с вами в течение пары часов.';
+        form.reset();
+        status.focus();
+      });
+
+      // Скрываем сообщение, когда пользователь начинает заполнять форму заново
+      form.addEventListener('input', function () {
+        status.textContent = '';
+      });
+    })();
+  </script>
+</body>
+</html>
