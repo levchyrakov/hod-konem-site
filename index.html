@@ -878,10 +878,17 @@
     .game-card__cover--brown { background-color: var(--color-brown); }
     .game-card__cover--sage { background-color: var(--color-sage); }
 
-    .game-card__emoji {
-      font-size: 3.75rem;
-      line-height: 1;
-      filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.2));
+    /* Фото-обложки игр вместо эмодзи (ЛР5, ветка game-covers) */
+    .game-card__cover {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .game-card__img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       transition: transform var(--transition);
     }
 
@@ -1835,8 +1842,8 @@
         box-shadow: var(--shadow-lg);
       }
 
-      .game-card:hover .game-card__emoji {
-        transform: scale(1.12) rotate(-6deg);
+      .game-card:hover .game-card__img {
+        transform: scale(1.06);
       }
 
       .schedule__item:hover {
@@ -2077,7 +2084,7 @@
           <li>
             <article class="game-card">
               <div class="game-card__cover game-card__cover--accent" aria-hidden="true">
-                <span class="game-card__emoji">🕵️</span>
+                <img class="game-card__img" src="images/games/codenames.jpg" alt="Партия в «Кодовые имена»" width="360" height="180" loading="lazy">
               </div>
               <div class="game-card__body">
                 <p class="game-card__genre">Пати-игра · слова</p>
@@ -2097,7 +2104,7 @@
           <li>
             <article class="game-card">
               <div class="game-card__cover game-card__cover--sage" aria-hidden="true">
-                <span class="game-card__emoji">🐇</span>
+                <img class="game-card__img" src="images/games/dixit.jpg" alt="Партия в «Диксит»" width="360" height="180" loading="lazy">
               </div>
               <div class="game-card__body">
                 <p class="game-card__genre">Пати-игра · ассоциации</p>
@@ -2117,7 +2124,7 @@
           <li>
             <article class="game-card">
               <div class="game-card__cover" aria-hidden="true">
-                <span class="game-card__emoji">🏰</span>
+                <img class="game-card__img" src="images/games/carcassonne.jpg" alt="Партия в «Каркассон»" width="360" height="180" loading="lazy">
               </div>
               <div class="game-card__body">
                 <p class="game-card__genre">Семейная · тайлы</p>
@@ -2137,7 +2144,7 @@
           <li>
             <article class="game-card">
               <div class="game-card__cover game-card__cover--accent" aria-hidden="true">
-                <span class="game-card__emoji">🌾</span>
+                <img class="game-card__img" src="images/games/catan.jpg" alt="Партия в «Колонизаторы»" width="360" height="180" loading="lazy">
               </div>
               <div class="game-card__body">
                 <p class="game-card__genre">Стратегия · торговля</p>
@@ -2157,7 +2164,7 @@
           <li>
             <article class="game-card">
               <div class="game-card__cover game-card__cover--brown" aria-hidden="true">
-                <span class="game-card__emoji">🚀</span>
+                <img class="game-card__img" src="images/games/terraforming-mars.jpg" alt="Партия в «Покорение Марса»" width="360" height="180" loading="lazy">
               </div>
               <div class="game-card__body">
                 <p class="game-card__genre">Стратегия · евро</p>
@@ -2177,7 +2184,7 @@
           <li>
             <article class="game-card">
               <div class="game-card__cover" aria-hidden="true">
-                <span class="game-card__emoji">🏭</span>
+                <img class="game-card__img" src="images/games/brass.jpg" alt="Партия в «Брасс. Бирмингем»" width="360" height="180" loading="lazy">
               </div>
               <div class="game-card__body">
                 <p class="game-card__genre">Экономическая стратегия</p>
@@ -2593,6 +2600,7 @@
       <div class="footer__bottom">
         <p>© 2026 Клуб настольных игр «Ход конём»</p>
         <p>Сайт является учебным проектом. Адрес, телефон и&nbsp;отзывы вымышлены.</p>
+        <p>Фотографии: <a href="https://github.com/levchyrakov/hod-konem-site/blob/main/CREDITS.md">Wikimedia Commons</a>, свободные лицензии CC.</p>
       </div>
     </div>
   </footer>
