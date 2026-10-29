@@ -774,6 +774,30 @@
       margin-bottom: 0;
     }
 
+    /* Фото зала в блоке «О клубе» (ЛР5, ветка club-photo) */
+    .about__photo {
+      margin: 1.5rem 0 0;
+      overflow: hidden;
+      background-color: var(--color-paper);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .about__photo img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 8 / 5;
+      object-fit: cover;
+    }
+
+    .about__photo figcaption {
+      padding: 0.75rem 1.25rem;
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+    }
+
     .features {
       display: grid;
       grid-template-columns: 1fr;
@@ -825,7 +849,7 @@
     @media (min-width: 900px) {
       .about__intro {
         grid-template-columns: 5fr 6fr;
-        align-items: end;
+        align-items: center;
       }
     }
 
@@ -2009,6 +2033,10 @@
           <div>
             <p class="eyebrow">О клубе</p>
             <h2 class="section__title" id="about-title">Место, где вечер проходит без&nbsp;телефона</h2>
+            <figure class="about__photo">
+              <img src="images/club.jpg" alt="Игровой зал: длинные столы и стеллаж с коробками настольных игр" width="560" height="350" loading="lazy">
+              <figcaption>Длинные столы на&nbsp;большие компании и&nbsp;стеллаж с&nbsp;играми (фото-иллюстрация).</figcaption>
+            </figure>
           </div>
           <div class="about__text">
             <p>«Ход конём» — клуб для тех, кто соскучился по&nbsp;живому общению. Каждый вечер мы раскладываем на&nbsp;зелёном сукне десятки коробок, ставим чайник и&nbsp;помогаем собраться компаниям за&nbsp;столами.</p>
